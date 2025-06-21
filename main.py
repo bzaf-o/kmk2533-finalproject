@@ -84,10 +84,10 @@ def evaluate_model(model, X_train, X_test, y_train, y_test, le, preprocessor):
     }
 
 # Plot functions (same as before)
-def plot_confusion_matrix(cm_df):
+def plot_confusion_matrix(cm_df, title='Confusion Matrix'):
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(cm_df, annot=True, fmt='d', cmap='Blues', ax=ax)
-    plt.title('Confusion Matrix')
+    plt.title(title)
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
     st.pyplot(fig)
@@ -170,7 +170,7 @@ def main():
                 st.metric("Cross-Validation Mean Accuracy", f"{result['cv_mean']:.2%}")
             
             st.subheader("Confusion Matrix")
-            plot_confusion_matrix(result['confusion_matrix'])
+            plot_confusion_matrix(result['confusion_matrix'], f"Confusion Matrix ({model_name})")
             
             st.subheader("Classification Report")
             st.dataframe(result['classification_report'])
